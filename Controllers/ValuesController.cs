@@ -17,12 +17,19 @@ namespace WebAPI.Controllers
             repository = new InMemRepository();
         }
 
-
         [HttpGet] // GET /items 
         public IEnumerable<Item> GetItems()
         {
             var items = repository.GetItems();
             return items;
+        }
+
+        [HttpGet]
+        [Route ("item")]
+        public decimal GetItemCost(Guid id)
+        {
+            var item = repository.GetItem(id);
+            return item.Price;
         }
     }
 }

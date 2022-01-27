@@ -22,6 +22,11 @@ namespace WebAPI.Repositories
         {
             return items.Where(item => item.Id == id).SingleOrDefault();
         }
+
+        public Item GetId(string name)
+        {
+            return items.Where(item => item.Name == name).SingleOrDefault();
+        }
     }
     
 }
