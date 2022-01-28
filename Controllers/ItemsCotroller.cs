@@ -10,26 +10,32 @@ namespace WebAPI.Controllers
     [Route("items")]
     public class ItemsContoller : ControllerBase
     {
-        private readonly InMemRepository repository;
+        private readonly IItemsRepository repository;
 
-        public ItemsContoller()
+
+        public ItemsContoller(IItemsRepository repository)
         {
-            repository = new InMemRepository();
+            this.repository = repository;
         }
 
-        [HttpGet] // GET /items 
+        [HttpGet] // /items 
         public IEnumerable<Item> GetItems()
         {
             var items = repository.GetItems();
             return items;
         }
 
-        [HttpGet]
-        [Route ("item")]
-        public decimal GetItemCost(Guid id)
+        [HttpGet("{id}")] // /items/{id}
+        public ActionResult<Item> GetItemCost(Guid id)
         {
             var item = repository.GetItem(id);
-            return item.Price;
+
+            if ( item == null)
+            {
+                return NotFound();
+            }
+
+            return item;
         }
     }
 }

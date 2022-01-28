@@ -4,7 +4,7 @@ using WebAPI.Models;
 
 namespace WebAPI.Repositories
 {
-    public class InMemRepository
+    public class InMemRepository : IItemsRepository
     {
         private readonly List<Item> items = new()
         {
@@ -22,11 +22,6 @@ namespace WebAPI.Repositories
         {
             return items.Where(item => item.Id == id).SingleOrDefault();
         }
-
-        public Item GetId(string name)
-        {
-            return items.Where(item => item.Name == name).SingleOrDefault();
-        }
     }
-    
+
 }
