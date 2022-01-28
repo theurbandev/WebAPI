@@ -7,25 +7,25 @@ using WebAPI.Repositories;
 namespace WebAPI.Controllers
 {
     [ApiController]
-    [Route("items")]
-    public class ItemsContoller : ControllerBase
+    [Route("[controller]")]
+    public class ItemsController : ControllerBase
     {
         private readonly IItemsRepository repository;
 
 
-        public ItemsContoller(IItemsRepository repository)
+        public ItemsController(IItemsRepository repository)
         {
             this.repository = repository;
         }
 
-        [HttpGet] // /items 
+        [HttpGet] 
         public IEnumerable<Item> GetItems()
         {
             var items = repository.GetItems();
             return items;
         }
 
-        [HttpGet("{id}")] // /items/{id}
+        [HttpGet("{id}")]
         public ActionResult<Item> GetItemCost(Guid id)
         {
             var item = repository.GetItem(id);
@@ -36,6 +36,15 @@ namespace WebAPI.Controllers
             }
 
             return item;
+        }
+
+        [HttpGet("price/{id}")]
+        public decimal GetPrice(Guid id)
+        {
+            var item = repository.GetItem(id);
+            var itemPrice = item.Price;
+
+            return itemPrice;
         }
     }
 }

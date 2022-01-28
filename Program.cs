@@ -10,6 +10,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient(); // Add HttpClient here
+
 builder.Services.AddSingleton<IItemsRepository>(new InMemRepository(){});
 
 var app = builder.Build();
