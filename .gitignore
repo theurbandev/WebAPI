@@ -5,3 +5,8 @@
 node_modules
 .vs
 .vs\
+*.suo
+*.user
+_ReSharper.*
+bin
+obj
